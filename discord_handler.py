@@ -21,7 +21,7 @@ async def dm():
         recipe_config = recipes.RecipeConfiguration(user['diet'], user['exclude'],
                                                     user['target_calories'])
         recipe_data = recipes.send_request(recipe_config)
-        # mail_handler.sendmail(recipe_data)
+        # mail_handler.sendmail(recipe_data, user)
         user = await bot.fetch_user(int(user['user_id']))
         embedVar = discord.Embed(title="Recipes", description="Todays recipes")
         for meal in recipe_data['meals']:
