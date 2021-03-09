@@ -11,7 +11,7 @@ context = ssl.create_default_context()
 server = smtplib.SMTP(smtp_server, port)
 
 
-def sendmail():
+def sendmail(recipe_data):
     try:
         server.ehlo()
         server.starttls(context=context)
@@ -20,7 +20,7 @@ def sendmail():
         server.login(sender_email, password)
         print("logged in")
         print("Sending Mail")
-        server.sendmail(sender_email, "aschvin00@gmail.com", "Hello My Friend")
+        server.sendmail(sender_email, "aschvin00@gmail.com", recipe_data)
         print("Email sent")
     except Exception as e:
         print(e)

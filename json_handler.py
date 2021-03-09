@@ -22,3 +22,9 @@ def update(config_param):
 def dump_data(data):
     with open('config.json', 'w') as json_file:
         json.dump(data, json_file)
+
+
+def get_all_users():
+    with open('config.json') as json_file:
+        data = json.load(json_file)
+        return data['configs']
