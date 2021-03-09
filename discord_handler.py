@@ -12,11 +12,11 @@ bot = commands.Bot(command_prefix='!')
 
 
 @bot.command(name='configure')
-async def on_message(ctx, diet, exclude, target_calories: int):
+async def on_message(ctx, email, diet, exclude, target_calories: int):
     if ctx.author == bot.user:
         return
     if not ctx.guild:
-        config = {'user_id': ctx.author.id, 'diet': diet, 'exclude': exclude,
+        config = {'email': email, 'user_id': ctx.author.id, 'diet': diet, 'exclude': exclude,
                   'target_calories': target_calories}
         json_handler.update(config)
         await ctx.send("Successfully updated config.")

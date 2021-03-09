@@ -7,8 +7,8 @@ def update(config_param):
         print(data)
         config_already_written = False
         for config in data['configs']:
-            print(config)
             if config_param['user_id'] == config['user_id']:
+                config['email'] = config_param['email']
                 config['diet'] = config_param['diet']
                 config['exclude'] = config_param['exclude']
                 config['target_calories'] = config_param['target_calories']
