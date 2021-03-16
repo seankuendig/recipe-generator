@@ -152,3 +152,5 @@ fabric.properties
 
 
 .env
+
+config.json
