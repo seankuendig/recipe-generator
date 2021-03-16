@@ -14,7 +14,7 @@ context = ssl.create_default_context()
 
 
 def sendmail(recipe_data, user):
-    server = smtplib.SMTP(smtp_server, port).connect(smtp_server, port)
+    server = smtplib.SMTP(smtp_server, port)
     listdata = ''
 
     for data in recipe_data['meals']:
