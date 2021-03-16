@@ -1,6 +1,7 @@
 import codecs
 import smtplib
 import ssl
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 from decouple import config
@@ -35,12 +36,21 @@ def sendmail(recipe_data, user):
         print("logged in")
         print("Sending Mail")
         print(recipe_data)
-        server.sendmail(sender_email, user['email'],
-                        MIMEText(codecs.open("recipe_email.html").read()
-                                 .replace("$LISTINPUT", listdata)
-                                 .replace("$DIET", user['diet'])
-                                 .replace("$TARGET_CALORIES", str(user['target_calories'])),
-                                 "html").as_string())
+
+        message = MIMEMultipart("alternative")
+        message["Subject"] = "Todays recipies"
+        message["From"] = sender_email
+        message["To"] = user['email']
+
+        html_mail = MIMEText(codecs.open("recipe_email.html").read()
+                             .replace("$LISTINPUT", listdata)
+                             .replace("$DIET", user['diet'])
+                             .replace("$TARGET_CALORIES", str(user['target_calories'])),
+                             "html")
+
+        message.attach(html_mail)
+
+        server.sendmail(sender_email, user['email'], message.as_string())
         print("Email sent")
     except Exception as e:
         print(e)
