@@ -27,5 +27,7 @@ def dump_data(data):
 def get_all_users():
     with open('config.json') as json_file:
         data = json.load(json_file)
-        if data['configs']:
+        if data.get('configs') is None:
+            return False
+        else:
             return data['configs']
